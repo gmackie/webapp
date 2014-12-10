@@ -1,8 +1,14 @@
+extern crate http;
+extern crate serialize;
 extern crate nickel;
 
+use http::status::NotFound
 use std::io::net::ip::Ipv4Addr;
-use nickel::{ Nickel, Request, Response, HttpRouter };
-
+use nickel::{
+      Nickel, NickelError, ErrorWithStatusCode,
+      Action, Continue, Halt, Request,
+      Response, IntoErrorHandler, HttpRouter,
+};
 fn main() {
     let mut server = Nickel::new();
     let mut router = Nickel::router();
